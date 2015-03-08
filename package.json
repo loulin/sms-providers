@@ -1,0 +1,36 @@
+{
+  "name": "sms-providers",
+  "version": "1.0.0",
+  "description": "SMS providers from Chinese market",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loulin/sms-providers"
+  },
+  "keywords": [
+    "SMS"
+  ],
+  "author": "Lin Lou <lin.lou@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loulin/sms-providers/issues"
+  },
+  "homepage": "https://github.com/loulin/sms-providers",
+  "devDependencies": {
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^4.0.0",
+    "gulp-sourcemaps": "^1.5.0",
+    "mocha": "^2.2.0",
+    "mocha-jshint": "0.0.9"
+  },
+  "dependencies": {
+    "lodash": "^3.4.0",
+    "moment": "^2.9.0",
+    "superagent": "^0.21.0",
+    "xml2js": "^0.4.5"
+  }
+}
