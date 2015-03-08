@@ -18,13 +18,13 @@ var SANDBOX_URL = "https://sandboxapp.cloopen.com:8883";
 var APP_URL = "https://app.cloopen.com:8883";
 
 var YunTongXun = (function () {
-  function YunTongXun(accountSid, authToken, appId, isProduction) {
+  function YunTongXun(config) {
     _classCallCheck(this, YunTongXun);
 
-    this.accountSid = accountSid;
-    this.authToken = authToken;
-    this.appId = appId;
-    this.baseUrl = isProduction ? APP_URL : SANDBOX_URL;
+    this.accountSid = config.accountSid;
+    this.authToken = config.authToken;
+    this.appId = config.appId;
+    this.baseUrl = config.online ? APP_URL : SANDBOX_URL;
     this.name = "yuntongxun";
   }
 
@@ -32,8 +32,8 @@ var YunTongXun = (function () {
     send: {
       value: function send(options, cb) {
         var baseUrl = this.baseUrl;
-        if (options.env) {
-          baseUrl = options.env === "production" ? APP_URL : SANDBOX_URL;
+        if (!_.isUndefined(options.online)) {
+          baseUrl = options.online ? APP_URL : SANDBOX_URL;
         }
 
         var timestamp = moment().format("YYYYMMDDHHmmss");
