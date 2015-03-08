@@ -7,18 +7,18 @@ const SANDBOX_URL = 'https://sandboxapp.cloopen.com:8883';
 const APP_URL = 'https://app.cloopen.com:8883';
 
 class YunTongXun {
-  constructor(accountSid, authToken, appId, isProduction) {
-    this.accountSid = accountSid;
-    this.authToken = authToken;
-    this.appId = appId;
-    this.baseUrl = isProduction ? APP_URL : SANDBOX_URL;
+  constructor(config) {
+    this.accountSid = config.accountSid;
+    this.authToken = config.authToken;
+    this.appId = config.appId;
+    this.baseUrl = config.online ? APP_URL : SANDBOX_URL;
     this.name = 'yuntongxun';
   }
 
   send(options, cb) {
     let baseUrl = this.baseUrl;
-    if (options.env) {
-      baseUrl = options.env === 'production' ? APP_URL : SANDBOX_URL;
+    if (!_.isUndefined(options.online)) {
+      baseUrl = options.online ? APP_URL : SANDBOX_URL;
     }
 
     let timestamp = moment().format('YYYYMMDDHHmmss');
