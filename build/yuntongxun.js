@@ -6,10 +6,6 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
-/*
-云通讯 http://docs.yuntongxun.com/index.php/%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97:%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81/%E9%80%9A%E7%9F%A5
-*/
-
 var request = _interopRequire(require("superagent"));
 
 var crypto = _interopRequire(require("crypto"));
@@ -18,6 +14,9 @@ var moment = _interopRequire(require("moment"));
 
 var _ = _interopRequire(require("lodash"));
 
+var SANDBOX_URL = "https://sandboxapp.cloopen.com:8883";
+var APP_URL = "https://app.cloopen.com:8883";
+
 var YunTongXun = (function () {
   function YunTongXun(accountSid, authToken, appId, isProduction) {
     _classCallCheck(this, YunTongXun);
@@ -25,19 +24,25 @@ var YunTongXun = (function () {
     this.accountSid = accountSid;
     this.authToken = authToken;
     this.appId = appId;
-    this.baseUrl = isProduction ? "https://app.cloopen.com:8883" : "https://sandboxapp.cloopen.com:8883";
+    this.baseUrl = isProduction ? APP_URL : SANDBOX_URL;
     this.name = "yuntongxun";
   }
 
   _createClass(YunTongXun, {
     send: {
       value: function send(options, cb) {
+        var baseUrl = this.baseUrl;
+        if (options.env) {
+          baseUrl = options.env === "production" ? APP_URL : SANDBOX_URL;
+        }
+
         var timestamp = moment().format("YYYYMMDDHHmmss");
 
         var sig = crypto.createHash("md5").update(this.accountSid + this.authToken + timestamp).digest("hex");
         var authorization = new Buffer("" + this.accountSid + ":" + timestamp).toString("base64");
-        var apiUrl = "" + this.baseUrl + "/2013-12-26/Accounts/" + this.accountSid + "/SMS/TemplateSMS?sig=" + sig;
+        var apiUrl = "" + baseUrl + "/2013-12-26/Accounts/" + this.accountSid + "/SMS/TemplateSMS?sig=" + sig;
 
+        // BUG: if body is object, the datas order is not guaranteed
         var datas = _.isObject(options.body) ? _.values(options.body) : options.body;
         var content = {
           to: options.to,

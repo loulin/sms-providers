@@ -16,7 +16,7 @@ var TheFirst = (function () {
 
     this.account = account;
     this.password = password;
-    this.name = "1xinxi";
+    this.name = "thefirst";
   }
 
   _createClass(TheFirst, {
@@ -54,4 +54,4 @@ var TheFirst = (function () {
 })();
 
 module.exports = TheFirst;
-//# sourceMappingURL=1xinxi.js.map
+//# sourceMappingURL=thefirst.js.map

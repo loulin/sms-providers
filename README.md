@@ -1,5 +1,5 @@
 # sms-providers
-SMS providers for [`smsex`](#https://github.com/loulin/smsex). More providers are in progress.
+SMS providers for [`smsex`](https://github.com/loulin/smsex). More providers are in progress.
 
 ## Installation
 

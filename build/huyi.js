@@ -12,16 +12,16 @@ var parseString = require("xml2js").parseString;
 
 var apiUrl = "http://106.ihuyi.cn/webservice/sms.php?method=Submit";
 
-var Ihuyi = (function () {
-  function Ihuyi(account, password) {
-    _classCallCheck(this, Ihuyi);
+var HuYi = (function () {
+  function HuYi(account, password) {
+    _classCallCheck(this, HuYi);
 
     this.account = account;
     this.password = password;
-    this.name = "ihuyi";
+    this.name = "huyi";
   }
 
-  _createClass(Ihuyi, {
+  _createClass(HuYi, {
     send: {
       value: function send(options, cb) {
         var data = {
@@ -59,8 +59,8 @@ var Ihuyi = (function () {
     }
   });
 
-  return Ihuyi;
+  return HuYi;
 })();
 
-module.exports = Ihuyi;
-//# sourceMappingURL=ihuyi.js.map
+module.exports = HuYi;
+//# sourceMappingURL=huyi.js.map
